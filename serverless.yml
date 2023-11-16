@@ -1,0 +1,23 @@
+service: prueba-tecnica
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  createToken:
+    handler: dist/index.createTokenHandler
+    events:
+      - http:
+          path: /createToken
+          method: POST
+
+  getCardData:
+    handler: dist/index.getCardDataHandler
+    events:
+      - http:
+          path: /getCardData/{token}
+          method: GET
+
+plugins:
+  - serverless-offline
